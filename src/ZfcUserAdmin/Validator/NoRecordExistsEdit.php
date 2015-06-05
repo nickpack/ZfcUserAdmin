@@ -7,7 +7,6 @@
 
 namespace ZfcUserAdmin\Validator;
 
-
 use ZfcUser\Validator\NoRecordExists;
 
 class NoRecordExistsEdit extends NoRecordExists

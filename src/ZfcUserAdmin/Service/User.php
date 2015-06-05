@@ -13,7 +13,6 @@ use ZfcUserAdmin\Options\ModuleOptions;
 use ZfcUser\Mapper\UserInterface as UserMapperInterface;
 use ZfcUser\Options\ModuleOptions as ZfcUserModuleOptions;
 
-
 class User extends EventProvider implements ServiceManagerAwareInterface
 {
 
@@ -79,10 +78,14 @@ class User extends EventProvider implements ServiceManagerAwareInterface
     {
         // first, process all form fields
         foreach ($data as $key => $value) {
-            if ($key == 'password') continue;
+            if ($key == 'password') {
+                continue;
+            }
 
             $setter = $this->getAccessorName($key);
-            if (method_exists($user, $setter)) call_user_func(array($user, $setter), $value);
+            if (method_exists($user, $setter)) {
+                call_user_func(array($user, $setter), $value);
+            }
         }
 
         $argv = array();

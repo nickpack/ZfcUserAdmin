@@ -85,10 +85,14 @@ class EditUser extends Register
         foreach ($this->getElements() as $element) {
             /** @var $element \Zend\Form\Element */
             $elementName = $element->getName();
-            if (strpos($elementName, 'password') === 0) continue;
+            if (strpos($elementName, 'password') === 0) {
+                continue;
+            }
 
             $getter = $this->getAccessorName($elementName, false);
-            if (method_exists($user, $getter)) $element->setValue(call_user_func(array($user, $getter)));
+            if (method_exists($user, $getter)) {
+                $element->setValue(call_user_func(array($user, $getter)));
+            }
         }
 
         foreach ($this->getUserEditOptions()->getEditFormElements() as $element) {
