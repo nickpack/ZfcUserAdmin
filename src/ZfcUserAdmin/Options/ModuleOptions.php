@@ -19,7 +19,7 @@ class ModuleOptions extends AbstractOptions implements
      * Key = Label in the list
      * Value = entity property(expecting a 'getProperty())
      */
-    protected $userListElements = array('Id' => 'id', 'Email address' => 'email');
+    protected $userListElements = array('Id' => 'id', 'Name' => 'display_name', 'Email address' => 'email');
 
     /**
      * Array of form elements to show when editing a user
@@ -40,7 +40,7 @@ class ModuleOptions extends AbstractOptions implements
      * true = create password automaticly
      * false = administrator chooses password
      */
-    protected $createUserAutoPassword = true;
+    protected $createUserAutoPassword = false;
 
     /**
      * @var int
