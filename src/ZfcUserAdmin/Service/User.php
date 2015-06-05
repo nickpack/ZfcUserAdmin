@@ -13,6 +13,10 @@ use ZfcUserAdmin\Options\ModuleOptions;
 use ZfcUser\Mapper\UserInterface as UserMapperInterface;
 use ZfcUser\Options\ModuleOptions as ZfcUserModuleOptions;
 
+/**
+ * Class User
+ * @package ZfcUserAdmin\Service
+ */
 class User extends EventProvider implements ServiceManagerAwareInterface
 {
 
@@ -124,6 +128,11 @@ class User extends EventProvider implements ServiceManagerAwareInterface
         return Rand::getString($this->getOptions()->getAutoPasswordLength());
     }
 
+    /**
+     * @param $property
+     * @param bool $set
+     * @return string
+     */
     protected function getAccessorName($property, $set = true)
     {
         $parts = explode('_', $property);
@@ -133,6 +142,9 @@ class User extends EventProvider implements ServiceManagerAwareInterface
         return (($set ? 'set' : 'get') . implode('', $parts));
     }
 
+    /**
+     * @return UserMapperInterface
+     */
     public function getUserMapper()
     {
         if (null === $this->userMapper) {
@@ -141,18 +153,29 @@ class User extends EventProvider implements ServiceManagerAwareInterface
         return $this->userMapper;
     }
 
+    /**
+     * @param UserMapperInterface $userMapper
+     * @return $this
+     */
     public function setUserMapper(UserMapperInterface $userMapper)
     {
         $this->userMapper = $userMapper;
         return $this;
     }
 
+    /**
+     * @param ModuleOptions $options
+     * @return $this
+     */
     public function setOptions(ModuleOptions $options)
     {
         $this->options = $options;
         return $this;
     }
 
+    /**
+     * @return \ZfcUser\Options\UserServiceOptionsInterface|ModuleOptions
+     */
     public function getOptions()
     {
         if (!$this->options instanceof ModuleOptions) {
@@ -161,6 +184,10 @@ class User extends EventProvider implements ServiceManagerAwareInterface
         return $this->options;
     }
 
+    /**
+     * @param ZfcUserModuleOptions $options
+     * @return $this
+     */
     public function setZfcUserOptions(ZfcUserModuleOptions $options)
     {
         $this->zfcUserOptions = $options;

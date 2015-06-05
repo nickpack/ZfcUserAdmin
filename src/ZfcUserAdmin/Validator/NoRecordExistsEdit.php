@@ -9,8 +9,17 @@ namespace ZfcUserAdmin\Validator;
 
 use ZfcUser\Validator\NoRecordExists;
 
+/**
+ * Class NoRecordExistsEdit
+ * @package ZfcUserAdmin\Validator
+ */
 class NoRecordExistsEdit extends NoRecordExists
 {
+    /**
+     * @param $value
+     * @param null $context
+     * @return bool
+     */
     public function isValid($value, $context = null)
     {
         $valid = true;
@@ -18,7 +27,7 @@ class NoRecordExistsEdit extends NoRecordExists
 
         /** @var $result \ZfcUser\Entity\UserInterface|null */
         $result = $this->query($value);
-        if ($result && $result->getId() != $context['userId']) {
+        if ($result && $result->getId() !== $context['userId']) {
             $valid = false;
             $this->error(self::ERROR_RECORD_FOUND);
         }

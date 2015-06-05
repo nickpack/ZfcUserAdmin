@@ -9,15 +9,31 @@ use ZfcUserAdmin\Options\UserEditOptionsInterface;
 use Zend\Form\Form;
 use Zend\Form\Element;
 
+/**
+ * Class EditUser
+ * @package ZfcUserAdmin\Form
+ */
 class EditUser extends Register
 {
     /**
      * @var \ZfcUserAdmin\Options\UserEditOptionsInterface
      */
     protected $userEditOptions;
+    /**
+     * @var
+     */
     protected $userEntity;
+    /**
+     * @var
+     */
     protected $serviceManager;
 
+    /**
+     * @param null $name
+     * @param UserEditOptionsInterface $options
+     * @param RegistrationOptionsInterface $registerOptions
+     * @param $serviceManager
+     */
     public function __construct($name = null, UserEditOptionsInterface $options, RegistrationOptionsInterface $registerOptions, $serviceManager)
     {
         $this->setUserEditOptions($options);
@@ -31,8 +47,8 @@ class EditUser extends Register
                 'name' => 'reset_password',
                 'type' => 'Zend\Form\Element\Checkbox',
                 'options' => array(
-                    'label' => 'Reset password to random',
-                ),
+                    'label' => 'Generate random password'
+                )
             ));
 
             $password = $this->get('password');
@@ -69,17 +85,26 @@ class EditUser extends Register
         ));
     }
 
+    /**
+     * @param $userEntity
+     */
     public function setUser($userEntity)
     {
         $this->userEntity = $userEntity;
         $this->getEventManager()->trigger('userSet', $this, array('user' => $userEntity));
     }
 
+    /**
+     * @return mixed
+     */
     public function getUser()
     {
         return $this->userEntity;
     }
 
+    /**
+     * @param UserInterface $user
+     */
     public function populateFromUser(UserInterface $user)
     {
         foreach ($this->getElements() as $element) {
@@ -102,6 +127,11 @@ class EditUser extends Register
         $this->get('userId')->setValue($user->getId());
     }
 
+    /**
+     * @param $property
+     * @param bool $set
+     * @return string
+     */
     protected function getAccessorName($property, $set = true)
     {
         $parts = explode('_', $property);
@@ -111,22 +141,35 @@ class EditUser extends Register
         return (($set ? 'set' : 'get') . implode('', $parts));
     }
 
+    /**
+     * @param UserEditOptionsInterface $userEditOptions
+     * @return $this
+     */
     public function setUserEditOptions(UserEditOptionsInterface $userEditOptions)
     {
         $this->userEditOptions = $userEditOptions;
         return $this;
     }
 
+    /**
+     * @return UserEditOptionsInterface
+     */
     public function getUserEditOptions()
     {
         return $this->userEditOptions;
     }
 
+    /**
+     * @param $serviceManager
+     */
     public function setServiceManager($serviceManager)
     {
         $this->serviceManager = $serviceManager;
     }
 
+    /**
+     * @return mixed
+     */
     public function getServiceManager()
     {
         return $this->serviceManager;

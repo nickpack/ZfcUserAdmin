@@ -9,15 +9,32 @@ use ZfcUser\Mapper\UserInterface;
 use ZfcUser\Options\ModuleOptions as ZfcUserModuleOptions;
 use ZfcUserAdmin\Options\ModuleOptions;
 
+/**
+ * Class UserAdminController
+ * @package ZfcUserAdmin\Controller
+ */
 class UserAdminController extends AbstractActionController
 {
-    protected $options, $userMapper;
+    /**
+     * @var
+     */
+    protected $options;
+    /**
+     * @var
+     */
+    protected $userMapper;
+    /**
+     * @var
+     */
     protected $zfcUserOptions;
     /**
      * @var \ZfcUserAdmin\Service\User
      */
     protected $adminUserService;
 
+    /**
+     * @return array
+     */
     public function listAction()
     {
         $userMapper = $this->getUserMapper();
@@ -36,6 +53,9 @@ class UserAdminController extends AbstractActionController
         );
     }
 
+    /**
+     * @return array
+     */
     public function createAction()
     {
         /** @var $form \ZfcUserAdmin\Form\CreateUser */
@@ -65,6 +85,9 @@ class UserAdminController extends AbstractActionController
         );
     }
 
+    /**
+     * @return array
+     */
     public function editAction()
     {
         $userId = $this->getEvent()->getRouteMatch()->getParam('userId');
@@ -95,6 +118,9 @@ class UserAdminController extends AbstractActionController
         );
     }
 
+    /**
+     * @return mixed
+     */
     public function removeAction()
     {
         $userId = $this->getEvent()->getRouteMatch()->getParam('userId');
@@ -114,12 +140,19 @@ class UserAdminController extends AbstractActionController
         return $this->redirect()->toRoute('zfcadmin/zfcuseradmin/list');
     }
 
+    /**
+     * @param ModuleOptions $options
+     * @return $this
+     */
     public function setOptions(ModuleOptions $options)
     {
         $this->options = $options;
         return $this;
     }
 
+    /**
+     * @return ModuleOptions
+     */
     public function getOptions()
     {
         if (!$this->options instanceof ModuleOptions) {
@@ -128,6 +161,9 @@ class UserAdminController extends AbstractActionController
         return $this->options;
     }
 
+    /**
+     * @return mixed
+     */
     public function getUserMapper()
     {
         if (null === $this->userMapper) {
@@ -136,12 +172,19 @@ class UserAdminController extends AbstractActionController
         return $this->userMapper;
     }
 
+    /**
+     * @param UserInterface $userMapper
+     * @return $this
+     */
     public function setUserMapper(UserInterface $userMapper)
     {
         $this->userMapper = $userMapper;
         return $this;
     }
 
+    /**
+     * @return \ZfcUserAdmin\Service\User
+     */
     public function getAdminUserService()
     {
         if (null === $this->adminUserService) {
@@ -150,12 +193,20 @@ class UserAdminController extends AbstractActionController
         return $this->adminUserService;
     }
 
+    /**
+     * @param $service
+     * @return $this
+     */
     public function setAdminUserService($service)
     {
         $this->adminUserService = $service;
         return $this;
     }
 
+    /**
+     * @param ZfcUserModuleOptions $options
+     * @return $this
+     */
     public function setZfcUserOptions(ZfcUserModuleOptions $options)
     {
         $this->zfcUserOptions = $options;

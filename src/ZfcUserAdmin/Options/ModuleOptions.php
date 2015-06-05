@@ -4,6 +4,10 @@ namespace ZfcUserAdmin\Options;
 
 use Zend\Stdlib\AbstractOptions;
 
+/**
+ * Class ModuleOptions
+ * @package ZfcUserAdmin\Options
+ */
 class ModuleOptions extends AbstractOptions implements
     UserListOptionsInterface,
     UserEditOptionsInterface,
@@ -54,73 +58,118 @@ class ModuleOptions extends AbstractOptions implements
      */
     protected $allowPasswordChange = true;
 
+    /**
+     * @var string
+     */
     protected $userMapper = 'ZfcUserAdmin\Mapper\UserDoctrine';
 
+    /**
+     * @param $userMapper
+     */
     public function setUserMapper($userMapper)
     {
         $this->userMapper = $userMapper;
     }
 
+    /**
+     * @return string
+     */
     public function getUserMapper()
     {
         return $this->userMapper;
     }
 
+    /**
+     * @param array $listElements
+     */
     public function setUserListElements(array $listElements)
     {
         $this->userListElements = $listElements;
     }
 
+    /**
+     * @return array
+     */
     public function getUserListElements()
     {
         return $this->userListElements;
     }
 
+    /**
+     * @return array
+     */
     public function getEditFormElements()
     {
         return $this->editFormElements;
     }
 
+    /**
+     * @param array $elements
+     */
     public function setEditFormElements(array $elements)
     {
         $this->editFormElements = $elements;
     }
 
+    /**
+     * @param array $createFormElements
+     */
     public function setCreateFormElements(array $createFormElements)
     {
         $this->createFormElements = $createFormElements;
     }
 
+    /**
+     * @return array
+     */
     public function getCreateFormElements()
     {
         return $this->createFormElements;
     }
 
+    /**
+     * @param $createUserAutoPassword
+     */
     public function setCreateUserAutoPassword($createUserAutoPassword)
     {
         $this->createUserAutoPassword = $createUserAutoPassword;
     }
 
+    /**
+     * @return bool
+     */
     public function getCreateUserAutoPassword()
     {
         return $this->createUserAutoPassword;
     }
 
+    /**
+     * @return bool
+     */
     public function getAllowPasswordChange()
     {
         return $this->allowPasswordChange;
     }
 
+    /**
+     * @param $allowPasswordChange
+     */
     public function setAdminPasswordChange($allowPasswordChange)
     {
         $this->allowPasswordChange = $allowPasswordChange;
     }
 
+    /**
+     * @param $autoPasswordLength
+     */
     public function setAutoPasswordLength($autoPasswordLength)
     {
         $this->autoPasswordLength = $autoPasswordLength;
     }
 
+    /**
+     * @return int
+     */
     public function getAutoPasswordLength()
     {
         return $this->autoPasswordLength;

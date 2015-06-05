@@ -6,6 +6,10 @@ use ZfcUserAdmin\Options\UserCreateOptionsInterface;
 use ZfcUser\Options\RegistrationOptionsInterface;
 use ZfcUser\Form\Register as Register;
 
+/**
+ * Class CreateUser
+ * @package ZfcUserAdmin\Form
+ */
 class CreateUser extends Register
 {
     /**
@@ -13,12 +17,21 @@ class CreateUser extends Register
      */
     protected $createOptionsOptions;
 
+    /**
+     * @var
+     */
     protected $serviceManager;
     /**
      * @var UserCreateOptionsInterface
      */
     protected $createOptions;
 
+    /**
+     * @param null $name
+     * @param UserCreateOptionsInterface $createOptions
+     * @param RegistrationOptionsInterface $registerOptions
+     * @param $serviceManager
+     */
     public function __construct($name = null, UserCreateOptionsInterface $createOptions, RegistrationOptionsInterface $registerOptions, $serviceManager)
     {
         $this->setCreateOptions($createOptions);
@@ -48,22 +61,35 @@ class CreateUser extends Register
         $this->get('submit')->setAttribute('label', 'Create');
     }
 
+    /**
+     * @param UserCreateOptionsInterface $createOptionsOptions
+     * @return $this
+     */
     public function setCreateOptions(UserCreateOptionsInterface $createOptionsOptions)
     {
         $this->createOptions = $createOptionsOptions;
         return $this;
     }
 
+    /**
+     * @return UserCreateOptionsInterface
+     */
     public function getCreateOptions()
     {
         return $this->createOptions;
     }
 
+    /**
+     * @param $serviceManager
+     */
     public function setServiceManager($serviceManager)
     {
         $this->serviceManager = $serviceManager;
     }
 
+    /**
+     * @return mixed
+     */
     public function getServiceManager()
     {
         return $this->serviceManager;
